@@ -10,4 +10,4 @@ COPY app /cache/app
 RUN pip install -r /cache/app/requirements.txt
 
 WORKDIR /cache/app
-CMD gunicorn -b :8080 main:app
+CMD gunicorn -b :$PORT main:app
