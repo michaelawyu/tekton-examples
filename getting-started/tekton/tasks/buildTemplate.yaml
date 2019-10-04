@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: build-taskrun
+spec:
+  taskRef:
+    name: build-test-app-task
+  inputs:
+    resources:
+      - name: git
+        resourceRef:
+          name: example-git
+  outputs:
+    resources:
+      - name: image
+        resourceRef:
+          name: example-image
