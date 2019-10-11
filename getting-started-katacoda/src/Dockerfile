@@ -4,6 +4,7 @@ RUN virtualenv /env
 
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH
+ENV PORT 8080
 
 COPY app /cache/app
 

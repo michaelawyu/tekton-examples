@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: build-test-deploy-app-pipeline
+spec:
+  resources:
+    # The input and output resources each task uses
+  tasks:
+    # The name of the task in this pipeline
+    - name: build-test-app-task
+      taskRef:
+        # The name of the task
+      resources:
+        # The input and output resources this specific task uses
+    # The name of the task in this pipeline
+    - name: deploy-app-task
+      taskRef:
+        # The name of the task
+      resources:
+        # The input and output resources this specific task uses

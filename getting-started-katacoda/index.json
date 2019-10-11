@@ -10,12 +10,12 @@
         "text": "concepts.md"
       },
       {
-        "title": "Step 1: Installing Tekton",
-        "text": "step1.md"
+        "title": "Setup",
+        "text": "setup.md"
       },
       {
-        "title": "Step 2",
-        "text": "step2.md"
+        "title": "Specifying Tekton tasks",
+        "text": "tasks.md"
       },
       {
         "title": "Step 3",

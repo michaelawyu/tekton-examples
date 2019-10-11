@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: deploy-app-task
+spec:
+  inputs:
+    resources:
+      - name: image
+        type: image
+  steps:
+    steps:
+      # Deploy the image
+      - name: deploy
+        image: lachlanevenson/k8s-kubectl
+        args:
+          - run
+          - mydeployment
+          - --image=myimage
+      # Expose the image for external acceess
+      - name: expose
+        image: lachlanevenson/k8s-kubectl
+        args:
+          - expose
+          - deploy
+          - mydeployment
+          - --port=80
+          - --target-port=8080
+          - --name=myservice

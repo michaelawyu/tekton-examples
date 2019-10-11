@@ -1,0 +1,29 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: build-test-app-task
+spec:
+  inputs:
+    resources:
+      - name: git
+        type: git
+  outputs:
+    resources:
+      - name: image
+        type: image
+  steps:
+    - name: pytest
+      image: python
+      command:
+        - /bin/bash
+        - -c
+      args:
+        - cd ${inputs.params.srcPath} && pip3 install -r requirements.txt && pip3 install -r dev_requirements.txt && pytest .
+    - name: docker
+      image: docker
+      command:
+        - docker
+        - build
+      args:
+        - -f /workspace/git/getting-started/src/Dockerfile
+        - .
