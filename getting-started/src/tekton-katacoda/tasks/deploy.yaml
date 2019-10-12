@@ -14,7 +14,7 @@ spec:
       args:
         - run
         - mydeployment
-        - --image=${inputs.resources.image.url}
+        - --image=$(inputs.resources.image.url)
     # Expose the image for external acceess
     - name: expose
       image: lachlanevenson/k8s-kubectl

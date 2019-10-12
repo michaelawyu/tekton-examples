@@ -1,6 +1,8 @@
 ## Before you begin
 
-Katacoda has set up a Kubernetes cluster for you to experimenting with Tekton.
+Start an experimental Kubernetes cluster in Katacoda with command
+`launch.sh`{{execute}}.
+
 Run `kubectl cluster-info`{{execute}} in the terminal to check its status.
 You should see the following outputs:
 
@@ -10,6 +12,10 @@ KubeDNS is running at ...
 
 ...
 ```
+
+Additionally, set up a persistent volume for Tekton:
+
+`mkdir /mnt/data && kubectl apply -f https://k8s.io/examples/pods/storage/pv-volume.yaml`{{execute}}
 
 ## Installing Tekton
 
@@ -24,6 +30,11 @@ progress, run the following command:
 `kubectl get pods --namespace tekton-pipelines`{{execute}}
 
 Every component listed in the output should have the status `running`.
+
+Lastly, ask Tekton to use the persistent volume you just create:
+
+`kubectl delete configmap/config-artifact-pvc -n tekton-pipelines`{{execute}}
+`kubectl create configmap config-artifact-pvc --from-literal=storageClassName=manual -n tekton-pipelines`{{execute}}
 
 ## Getting the code
 

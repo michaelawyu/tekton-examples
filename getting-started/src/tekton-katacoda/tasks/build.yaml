@@ -15,11 +15,13 @@ spec:
       - name: srcPath
         type: string
         description: The path to the source code
-        default: /workspace/git/getting-started/app
+        default: /workspace/git/getting-started/src/app
   outputs:
-    resources:
-      - name: image
-        type: image
+    params:
+      - name: localImageName
+        type: string
+        description: The name of the image
+        default: myimage
   volumes:
     # Mount the docker socket from the node for building images
     # See the tutorial for more information
@@ -34,13 +36,13 @@ spec:
         - /bin/bash
         - -c
       args:
-        - cd ${inputs.params.srcPath} && pip3 install -r requirements.txt && pip3 install -r dev_requirements.txt && pytest .
+        - cd $(inputs.params.srcPath) && pip3 install -r requirements.txt && pip3 install -r dev_requirements.txt && pytest .
     - name: docker
       image: docker
       command:
         - docker
       args:
         - build
-        - -f ${inputs.params.dockerfilePath}
-        - -t ${outputs.resources.image.url}
+        - -f $(inputs.params.dockerfilePath)
+        - -t $(outputs.params.localImageName)
         - .
