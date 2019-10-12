@@ -7,10 +7,26 @@ spec:
     resources:
       - name: git
         type: git
+    params:
+      - name: dockerfilePath
+        type: string
+        description: The path to the dockerfile
+        default: /workspace/git/getting-started/src/Dockerfile
+      - name: srcPath
+        type: string
+        description: The path to the source code
+        default: /workspace/git/getting-started/app
   outputs:
     resources:
       - name: image
         type: image
+  volumes:
+    # Mount the docker socket from the node for building images
+    # See the tutorial for more information
+    - name: docker-socket
+      hostPath:
+        type: Socket
+        path: /var/run/docker.sock
   steps:
     - name: pytest
       image: python
@@ -23,7 +39,8 @@ spec:
       image: docker
       command:
         - docker
-        - build
       args:
-        - -f /workspace/git/getting-started/src/Dockerfile
+        - build
+        - -f ${inputs.params.dockerfilePath}
+        - -t ${outputs.resources.image.url}
         - .

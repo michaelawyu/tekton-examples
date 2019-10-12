@@ -20,6 +20,10 @@ spec:
       name: example-image
 ```
 
+To apply the `pipelineRun` specification, run the command below:
+
+`cd ~/tekton-examples/getting-started/src/tekton-katacoda/ && kubectl apply -f pipelines/run.yaml`{{execute}}
+
 ## Almost done
 
 You can check the status of your pipeline with the following command:

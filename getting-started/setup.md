@@ -35,7 +35,7 @@ To clone this repository, run the following command:
 Open the directory `tekton-example/getting-started/src` with the file explorer.
 The directory consists of three subdirectories and one file: 
 
-* app/: a simple Python Flask web application
-* tekton-katacoda/: Tekton resource specifications you will use in this scenario
-* tekton-qwiklabs/: N/A
-* Dockerfile: a Dockerfile for building app/ into a runnable container image
+* `app/`: a simple Python Flask web application
+* `tekton-katacoda/`: Tekton resource specifications you will use in this scenario
+* `tekton-qwiklabs/`: N/A for this scenario
+* `Dockerfile`: a Dockerfile for building app/ into a runnable container image

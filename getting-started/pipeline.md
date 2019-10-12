@@ -69,4 +69,4 @@ complete pipeline specification is available at
 `tekton-examples/getting-started/src/tekton-katacoda/pipelines/pipeline.yaml`.
 To apply this pipeline, run the command below:
 
-`cd ~/tekton-examples/getting-started/src/tekton-katacode/ && kubectl apply -f pipelines/pipeline.yaml`{{execute}}
+`cd ~/tekton-examples/getting-started/src/tekton-katacoda/ && kubectl apply -f pipelines/pipeline.yaml`{{execute}}

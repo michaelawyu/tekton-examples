@@ -29,7 +29,7 @@ First, you will create a simple Tekton task with one step: running all the
 tests in `app/`. Naturally, the task requires that Tekton clones the source
 code from GitHub, which you can specify in the field `spec.inputs.resources`:
 
-1. Open `tekton-examples/getting-started/src/tekton/tasks/buildTemplate.yaml`.
+1. Open `tekton-examples/getting-started/src/tekton-katacoda/tasks/buildTemplate.yaml`.
 2. Edit the file; add a new resource to `spec.inputs.resources`:
 
     ```
@@ -155,7 +155,7 @@ cluster.
         args:
           - run
           - mydeployment
-          - --image=myimage
+          - --image=${inputs.resources.image.url}
       # Expose the image for external acceess
       - name: expose
         image: lachlanevenson/k8s-kubectl

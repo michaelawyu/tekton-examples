@@ -8,21 +8,21 @@ spec:
       - name: image
         type: image
   steps:
-    steps:
-      # Deploy the image
-      - name: deploy
-        image: lachlanevenson/k8s-kubectl
-        args:
-          - run
-          - mydeployment
-          - --image=myimage
-      # Expose the image for external acceess
-      - name: expose
-        image: lachlanevenson/k8s-kubectl
-        args:
-          - expose
-          - deploy
-          - mydeployment
-          - --port=80
-          - --target-port=8080
-          - --name=myservice
+    # Deploy the image
+    - name: deploy
+      image: lachlanevenson/k8s-kubectl
+      args:
+        - run
+        - mydeployment
+        - --image=${inputs.resources.image.url}
+    # Expose the image for external acceess
+    - name: expose
+      image: lachlanevenson/k8s-kubectl
+      args:
+        - expose
+        - deploy
+        - mydeployment
+        - --port=80
+        - --target-port=8080
+        - --name=myservice
+        - --type="NodePort"

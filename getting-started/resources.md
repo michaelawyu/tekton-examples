@@ -25,15 +25,11 @@ The example above is also available at
 `tekton-examples/getting-started/src/tekton-katacoda/resources/git.yaml`. To
 apply it, run the command below:
 
-```sh
-cd ~/tekton-examples/getting-started/src/tekton-katacoda/ && kubectl apply -f resources/git.yaml
-```
+`cd ~/tekton-examples/getting-started/src/tekton-katacoda/ && kubectl apply -f resources/git.yaml`{{execute}}
 
 Similarly, the specification for the `image` pipeline resource is
 available at `tekton-examples/getting-started/src/tekton-katacoda/resources/image.yaml`.
 This pipeline resource includes the name of the built image. To apply it,
 run the command below:
 
-```sh
-cd ~/tekton-examples/getting-started/src/tekton-katacoda/ && kubectl apply -f resources/image.yaml
-```
+`cd ~/tekton-examples/getting-started/src/tekton-katacoda/ && kubectl apply -f resources/image.yaml`{{execute}}
