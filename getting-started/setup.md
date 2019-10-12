@@ -33,8 +33,9 @@ To clone this repository, run the following command:
 `git clone https://github.com/michaelawyu/tekton-examples`{{execute}}
 
 Open the directory `tekton-example/getting-started/src` with the file explorer.
-The directory consists of two subdirectories and one file: 
+The directory consists of three subdirectories and one file: 
 
 * app/: a simple Python Flask web application
-* tekton/: Tekton resource specifications you will use in this lab
+* tekton-katacoda/: Tekton resource specifications you will use in this scenario
+* tekton-qwiklabs/: N/A
 * Dockerfile: a Dockerfile for building app/ into a runnable container image

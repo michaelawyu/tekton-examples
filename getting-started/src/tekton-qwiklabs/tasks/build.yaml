@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: build-test-app-task
+  name: build-test-app
 spec:
   inputs:
     resources:

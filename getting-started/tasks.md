@@ -103,9 +103,16 @@ steps:
     args:
       - build
       - -f /workspace/git/getting-started/src/Dockerfile
-      - -t myimage
+      - -t ${outputs.resources.image.url}
       - .
 ```
+
+Note that in this step we use a variable, `outputs.resources.image.url`,
+instead of a static value, as the name of the image. This setting reads
+the variable from the `outputs` field in the specification, allowing
+Tekton developers to switch configurations at runtime without having to
+specify a new task every time a value changes. You can also add custom
+variables using the `params` field in `inputs` and `outputs`.
 
 **Important**: This step builds a container image within a container and saves
 it in the node running the container. The operation is insecure and for
@@ -159,6 +166,7 @@ cluster.
           - --port=80
           - --target-port=8080
           - --name=myservice
+          - --type="NodePort"
     ```
 
     This step uses the [`lachlanevenson/k8s-kubectl`](https://hub.docker.com/r/lachlanevenson/k8s-kubectl)

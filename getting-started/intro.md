@@ -1,3 +1,5 @@
+![logo](/images/logo.png)
+
 Tekton is a Google-developed open-source framework for creating continuous
 integration and deployment (CI/CD) systems. With Tekton, you may build,
 test, and deploy code across a variety of environments in an easy,

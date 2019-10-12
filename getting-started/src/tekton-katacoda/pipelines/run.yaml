@@ -1,10 +1,10 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineRun
 metadata:
-  name: build-test-deploy-app-pipeline-run
+  name: build-test-deploy-app-run
 spec:
   pipelineRef:
-    name: build-test-deploy-app-pipeline
+    name: build-test-deploy-app
   resources:
     - name: git
       resourceRef:

@@ -1,0 +1,72 @@
+You can now build the two tasks into a Tekton pipeline. Open and edit
+`tekton-examples/getting-started/src/tekton-katacoda/pipelines/pipelineTemplate.yaml`.
+
+The pipeline must include all the input and output resources the tasks within
+use. Add them in the `spec.resources` field:
+
+```yaml
+spec:
+  resources:
+    - name: git
+      type: git
+    - name: image
+      type: image
+```
+
+In other words, to trigger this pipeline, one must provide a resource of
+the `git` type and another one of the `image` type, which Tekton will pass to
+the tasks requesting them.
+
+Add tasks to the `spec.tasks` field using their names:
+
+```yaml
+  tasks:
+    # The name of the task in this pipeline
+    - name: build-test-app
+      taskRef:
+        # The name of the task
+        name: build-test-app
+      resources:
+        # The input and output resources this specific task uses
+    # The name of the task in this pipeline
+    - name: deploy-app
+      taskRef:
+        # The name of the task
+        name: deploy-app
+      resources:
+        # The input and output resources this specific task uses
+```
+
+You can find the name of a task in the `metadata.name` field of its
+specification.
+
+Additionally, you must specify the input and output resources each specific
+task requires so that Tekton pipeline can allocate them correctly:
+
+```yaml
+tasks:
+  - name: build-test-app
+    taskRef:
+      name: build-test-app
+    resources:
+      inputs:
+        - name: git
+          resource: git
+      outputs:
+        - name: image
+          resource: image
+  - name: deploy-app
+    taskRef:
+      name: deploy-app
+    resources:
+      inputs:
+        - name: image
+          resource: image
+```
+
+The pipeline is now ready. If you have not followed every step above, a
+complete pipeline specification is available at
+`tekton-examples/getting-started/src/tekton-katacoda/pipelines/pipeline.yaml`.
+To apply this pipeline, run the command below:
+
+`cd ~/tekton-examples/getting-started/src/tekton-katacode/ && kubectl apply -f pipelines/pipeline.yaml`{{execute}}

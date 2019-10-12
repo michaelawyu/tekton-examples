@@ -18,12 +18,16 @@
         "text": "tasks.md"
       },
       {
-        "title": "Step 3",
-        "text": "step3.md"
+        "title": "Building tasks into a pipeline",
+        "text": "pipeline.md"
       },
       {
-        "title": "Step 4",
-        "text": "step4.md"
+        "title": "Adding the resources",
+        "text": "resources.md"
+      },
+      {
+        "title": "Running the pipeline",
+        "text": "run.md"
       }
     ],
     "intro": {

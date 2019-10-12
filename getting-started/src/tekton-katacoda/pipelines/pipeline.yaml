@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: build-test-deploy-app-pipeline
+  name: build-test-deploy-app
 spec:
   resources:
     - name: git
@@ -9,9 +9,9 @@ spec:
     - name: image
       type: image
   tasks:
-    - name: build-test-app-task
+    - name: build-test-app
       taskRef:
-        name: build-test-app-task
+        name: build-test-app
       resources:
         inputs:
           - name: git
@@ -19,9 +19,9 @@ spec:
         outputs:
           - name: image
             resource: image
-    - name: deploy-app-task
+    - name: deploy-app
       taskRef:
-        name: deploy-app-task
+        name: deploy-app
       resources:
         inputs:
           - name: image
