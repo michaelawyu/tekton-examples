@@ -14,27 +14,25 @@ spec:
 In other words, to trigger this pipeline, one must provide a resource of
 the `git` type, which Tekton will pass to tasks requesting them.
 
-Add tasks to the `spec.tasks` field using their names:
+Then you can add tasks to the `spec.tasks` field using their names:
 
 ```yaml
   tasks:
-    # The name of the task in this pipeline
-    - name: build-test-app
-      taskRef:
-        # The name of the task
-        name: build-test-app
-      resources:
-        # The input and output resources this specific task uses
-    # The name of the task in this pipeline
-    - name: deploy-app
-      taskRef:
-        # The name of the task
-        name: deploy-app
-      resources:
-        # The input and output resources this specific task uses
+  # The name of the task in this pipeline
+  - name: build-test-app
+    taskRef:
+      # The name of the task
+      name: build-test-app
+    resources:
+      # The input and output resources this specific task uses
+  # The name of the task in this pipeline
+  - name: deploy-app
+    taskRef:
+      # The name of the task
+      name: deploy-app
 ```
 
-You can find the name of a task in the `metadata.name` field of its
+The name of a task is available in the `metadata.name` field of its
 specification.
 
 Additionally, you must specify the input and output resources each specific
@@ -47,18 +45,9 @@ tasks:
       name: build-test-app
     resources:
       inputs:
-        - name: git
-          resource: git
-      outputs:
-        - name: image
-          resource: image
-  - name: deploy-app
-    taskRef:
-      name: deploy-app
-    resources:
-      inputs:
-        - name: image
-          resource: image
+      - name: git
+        resource: git
+  ...
 ```
 
 The pipeline is now ready. If you have not followed every step above, a

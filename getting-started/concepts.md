@@ -7,4 +7,4 @@ For example, if you plan to build a CI/CD system that builds source code
 from your GitHub repository into a container image, the Tekton pipeline may
 look as follows:
 
-![architecture](/images/architecture.png)
+![architecture](https://github.com/michaelawyu/tekton-examples/blob/master/getting-started/images/architecture.png?raw=true)

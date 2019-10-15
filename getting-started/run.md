@@ -64,7 +64,7 @@ pipeline.
 
     `kubectl get svc`{{execute}}
 
-    Write down the `CLUSTER-IP` of `myservice`.
+    Write down the `CLUSTER-IP` of `mysvc`.
 
 2. Run the following command to access the service:
 

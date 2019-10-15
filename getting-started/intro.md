@@ -1,4 +1,4 @@
-![logo](getting-started/images/logo.png)
+![logo](https://github.com/michaelawyu/tekton-examples/blob/master/getting-started/images/logo.png?raw=true)
 
 Tekton is a Google-developed open-source framework for creating continuous
 integration and deployment (CI/CD) systems. With Tekton, you may build,
