@@ -1,6 +1,6 @@
 With all the tasks, pipeline resources, and the pipeline itself applied,
 you can set your CI/CD system in motion. To trigger a pipeline manually,
-create (once again) a YAML file of the pipelineRun kind. The specification
+create (once again) a YAML file of the `pipelineRun` kind. The specification
 should include the name of the pipeline, and the pipeline resources it uses:
 
 ```yaml
@@ -13,11 +13,8 @@ spec:
   name: build-test-deploy-app
   resources:
   - name: git
-      resourceRef:
+    resourceRef:
       name: example-git
-  - name: image
-      resourceRef:
-      name: example-image
 ```
 
 To apply the `pipelineRun` specification, run the command below:
@@ -52,7 +49,7 @@ status:
     ...
 ```
 
-Check the message, reason, and status Tekton reports. Should an error occur
+**Check the message, reason, and status Tekton reports**. Should an error occur
 when running the pipeline, the cause will be reported in these fields with
 instructions for troubleshooting. If everything runs smoothly, you should see
 an `All Steps have completed executing message` with a `Succeeded` reason

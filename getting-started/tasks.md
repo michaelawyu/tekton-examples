@@ -36,8 +36,8 @@ code from GitHub, which you can specify in the field `spec.inputs.resources`:
     spec:
       inputs:
         resources:
-          - name: git
-            type: git
+        - name: git
+          type: git
     ```
 
     `git` is one of the built-in resource types Tekton provides. It specifies
@@ -62,63 +62,49 @@ step to `spec.steps`:
 
 ```yaml
 steps:
-  # The name of the step
-  - name: pytest
-    image: python
-    command:
-      - /bin/bash
-      - -c
-    args:
-      # Changes to the app/ directory, installs required dependencies, and
-      # run all the tests with pytest
-      - cd /workspace/git/getting-started/src/app && pip3 install -r requirements.txt && pip3 install -r dev_requirements.txt && pytest .
+# The name of the step
+- name: pytest
+  image: python
+  command:
+  - /bin/bash
+  - -c
+  args:
+  # Changes to the app/ directory, installs required dependencies, and
+  # run all the tests with pytest
+  - cd /workspace/git/getting-started/src/app && pip3 install -r requirements.txt && pip3 install -r dev_requirements.txt && pytest .
 ```
 
 ### Add more steps
 
-The code is ready for containerization after all the tests pass. Since the
-containerization process outputs an image, you need to update
-`spec.outputs.resources` before adding a second step:
+The code is ready for containerization after all the tests pass. For simplicity
+reasons, in this scenario, you will build the container image with Docker and
+save it locally (as opposed to pushing it to a remote repository).
 
-```yaml
-  outputs:
-    resources:
-      - name: image
-        type: image
-```
-
-`image` is another built-in resource types Tekton provides. It specifies
-that the task returns a container image.
-
-To build the image, add the following step to the task:
+Add the following step to the task:
 
 ```yaml
 steps:
-  - name: pytest
-    ...
-  - name: docker
-    image: docker
-    command:
-      - docker
-    args:
-      - build
-      - -f /workspace/git/getting-started/src/Dockerfile
-      - -t ${outputs.resources.image.url}
-      - .
+- name: pytest
+  ...
+- name: docker
+  image: docker
+  command:
+  - docker
+  args:
+  - build
+  - -f
+  - /workspace/git/getting-started/src/Dockerfile
+  - -t
+  - app
+  - /workspace/git/getting-started/src
 ```
 
-Note that in this step we use a variable, `outputs.resources.image.url`,
-instead of a static value, as the name of the image. This setting reads
-the variable from the `outputs` field in the specification, allowing
-Tekton developers to switch configurations at runtime without having to
-specify a new task every time a value changes. You can also add custom
-variables using the `params` field in `inputs` and `outputs`.
+This step invokes Docker to build the image and gives it the name `app`.
 
-**Important**: This step builds a container image within a container and saves
-it in the node running the container. The operation is insecure and for
-demonstration purposes only; consider using other container builders, such
-as [Kaniko](https://github.com/GoogleContainerTools/kaniko), instead in
-production systems.
+**Important**: For security reasons, in production systems you should not
+use Docker for image building. Alternatives include [Kaniko](https://github.com/GoogleContainerTools/kaniko),
+[BuildKit](https://github.com/moby/buildkit), [img](https://github.com/genuinetools/img),
+and many more.
 
 Your first Tekton task is now ready. If you have not followed every step above,
 a complete task specification is available at
@@ -130,43 +116,32 @@ To apply this task, run the command below:
 ## Your second Tekton task (also the last)
 
 The image is now ready for deployment. In this scenario, you will create a
-second task for this purpose, which takes the output of the first task
-as input and uses the `kubectl` tool image to spin up the container in the
-cluster.
+second task for this purpose, which uses the `kubectl` tool image to spin up
+the container you just build in the cluster.
 
 1. Open `tekton-examples/getting-started/src/tekton-katacoda/tasks/deployTemplate.yaml`.
-2. Edit the file; add the output resource in the previous step as the input:
-
-    ```yaml
-    spec:
-      inputs:
-        resources:
-          - name: image
-            type: image
-    ```
-
-3. With the input resource ready, you may now add the steps:
+2. Add the steps:
 
     ```yaml
     steps:
-      # Deploy the image
-      - name: deploy
-        image: lachlanevenson/k8s-kubectl
-        args:
-          - run
-          - mydeployment
-          - --image=${inputs.resources.image.url}
-      # Expose the image for external acceess
-      - name: expose
-        image: lachlanevenson/k8s-kubectl
-        args:
-          - expose
-          - deploy
-          - mydeployment
-          - --port=80
-          - --target-port=8080
-          - --name=myservice
-          - --type="NodePort"
+    # Deploy the image
+    - name: deploy
+      image: lachlanevenson/k8s-kubectl
+      args:
+        - run
+        - myapp
+        - --image=app
+    # Expose the image for external acceess
+    - name: expose
+      image: lachlanevenson/k8s-kubectl
+      args:
+      - expose
+      - deploy
+      - myapp
+      - --port=80
+      - --target-port=8080
+      - --name=mysvc
+      - --type="NodePort"
     ```
 
     This step uses the [`lachlanevenson/k8s-kubectl`](https://hub.docker.com/r/lachlanevenson/k8s-kubectl)
@@ -177,3 +152,11 @@ for a complete specification of this task. To apply this task, run
 the commend below:
 
 `cd ~/tekton-examples/getting-started/src/tekton-katacoda/ && kubectl apply -f tasks/deploy.yaml`{{execute}}
+
+## A side note
+
+So far you have been using hard-coded values in your tasks. Tekton also
+supports variables in its specification, which allows developers
+to switch configurations easily at runtime. You can specify
+them in `spec.inputs` as `params` and use them in the steps with the
+`$(YOUR-VAR-NAME)` syntax. For examples, see [build.yaml] and [deploy.yaml].

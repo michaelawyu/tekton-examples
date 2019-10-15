@@ -13,10 +13,6 @@ KubeDNS is running at ...
 ...
 ```
 
-Additionally, set up a persistent volume for Tekton:
-
-`mkdir /mnt/data && kubectl apply -f https://k8s.io/examples/pods/storage/pv-volume.yaml`{{execute}}
-
 ## Installing Tekton
 
 To add Tekton to this experimental Kubernetes cluster, execute the command
@@ -30,11 +26,6 @@ progress, run the following command:
 `kubectl get pods --namespace tekton-pipelines`{{execute}}
 
 Every component listed in the output should have the status `running`.
-
-Lastly, ask Tekton to use the persistent volume you just create:
-
-`kubectl delete configmap/config-artifact-pvc -n tekton-pipelines`{{execute}}
-`kubectl create configmap config-artifact-pvc --from-literal=storageClassName=manual -n tekton-pipelines`{{execute}}
 
 ## Getting the code
 
@@ -50,3 +41,11 @@ The directory consists of three subdirectories and one file:
 * `tekton-katacoda/`: Tekton resource specifications you will use in this scenario
 * `tekton-qwiklabs/`: N/A for this scenario
 * `Dockerfile`: a Dockerfile for building app/ into a runnable container image
+
+## Almost done
+
+Tekton is now running in your Katacode experimental cluster. To help the
+installation run smoothly in this special environment, a few extra steps
+are required:
+
+`./tekton-examples/getting-started/src/init.sh`

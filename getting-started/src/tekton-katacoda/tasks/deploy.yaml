@@ -4,25 +4,29 @@ metadata:
   name: deploy-app
 spec:
   inputs:
-    resources:
-      - name: image
-        type: image
+    params:
+    - name: imageName
+      type: string
+      description: The name of built image
+      default: app
   steps:
     # Deploy the image
     - name: deploy
       image: lachlanevenson/k8s-kubectl
       args:
-        - run
-        - mydeployment
-        - --image=$(inputs.resources.image.url)
+      - run
+      - myapp
+      - --image=$(inputs.params.imageName)
+      # Ask Kubectl to pull image from local Docker repository
+      - --image-pull-policy=Never
     # Expose the image for external acceess
     - name: expose
       image: lachlanevenson/k8s-kubectl
       args:
-        - expose
-        - deploy
-        - mydeployment
-        - --port=80
-        - --target-port=8080
-        - --name=myservice
-        - --type="NodePort"
+      - expose
+      - deploy
+      - myapp
+      - --port=80
+      - --target-port=8080
+      - --name=mysvc
+      - --type="NodePort"

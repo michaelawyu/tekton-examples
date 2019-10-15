@@ -7,9 +7,6 @@ spec:
   inputs:
     resources:
       # The input resource(s) of the task, such as a GitHub repository
-  outputs:
-    resources:
-      # The output resource(s) of the task, such as an image built from the source code
   volumes:
     # Mount the docker socket from the node for building images
     # See the tutorial for more information
@@ -19,3 +16,11 @@ spec:
         path: /var/run/docker.sock
   steps:
     # Each step of the task
+  # Volumes mounted to support Katacoda single-node K8S environment
+  volumes:
+  - name: dsocket
+    persistentVolumeClaim:
+      claimName: dsocket-vol-claim
+  - name: dlib
+    persistentVolumeClaim:
+      claimName: dlib-vol-claim

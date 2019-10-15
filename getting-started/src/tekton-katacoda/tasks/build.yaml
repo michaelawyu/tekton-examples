@@ -5,44 +5,53 @@ metadata:
 spec:
   inputs:
     resources:
-      - name: git
-        type: git
+    - name: git
+      type: git
     params:
-      - name: dockerfilePath
-        type: string
-        description: The path to the dockerfile
-        default: /workspace/git/getting-started/src/Dockerfile
-      - name: srcPath
-        type: string
-        description: The path to the source code
-        default: /workspace/git/getting-started/src/app
-  outputs:
-    params:
-      - name: localImageName
-        type: string
-        description: The name of the image
-        default: myimage
-  volumes:
-    # Mount the docker socket from the node for building images
-    # See the tutorial for more information
-    - name: docker-socket
-      hostPath:
-        type: Socket
-        path: /var/run/docker.sock
+    - name: dockerfilePath
+      type: string
+      description: The path to the dockerfile
+      default: /workspace/git/getting-started/src/Dockerfile
+    - name: srcPath
+      type: string
+      description: The path to the source code
+      default: /workspace/git/getting-started/src/app
+    - name: contextPath
+      type: string
+      description: Docker build context
+      default: /workspace/git/getting-started/src/
+    - name: imageName
+      type: string
+      description: The name of built image
+      default: app
   steps:
-    - name: pytest
-      image: python
-      command:
-        - /bin/bash
-        - -c
-      args:
-        - cd $(inputs.params.srcPath) && pip3 install -r requirements.txt && pip3 install -r dev_requirements.txt && pytest .
-    - name: docker
-      image: docker
-      command:
-        - docker
-      args:
-        - build
-        - -f $(inputs.params.dockerfilePath)
-        - -t $(outputs.params.localImageName)
-        - .
+  - name: pytest
+    image: python
+    command:
+    - /bin/bash
+    - -c
+    args:
+    - cd $(inputs.params.srcPath) && pip3 install -r requirements.txt && pip3 install -r dev_requirements.txt && pytest .
+  - name: docker
+    image: docker
+    command:
+      - docker
+    args:
+    - build
+    - -f
+    - $(inputs.params.dockerfilePath)
+    - -t
+    - $(inputs.params.imageName)
+    - $(inputs.params.contextPath)
+    volumeMounts:
+    - name: dsocket
+      mountPath: /var/run/docker.sock
+    - name: dlib
+      mountPath: /var/lib/docker
+  volumes:
+  - name: dsocket
+    persistentVolumeClaim:
+      claimName: dsocket-vol-claim
+  - name: dlib
+    persistentVolumeClaim:
+      claimName: dlib-vol-claim

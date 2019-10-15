@@ -1,21 +1,18 @@
 You can now build the two tasks into a Tekton pipeline. Open and edit
 `tekton-examples/getting-started/src/tekton-katacoda/pipelines/pipelineTemplate.yaml`.
 
-The pipeline must include all the input and output resources the tasks within
+The pipeline must include all the resources the tasks within
 use. Add them in the `spec.resources` field:
 
 ```yaml
 spec:
   resources:
-    - name: git
-      type: git
-    - name: image
-      type: image
+  - name: git
+    type: git
 ```
 
 In other words, to trigger this pipeline, one must provide a resource of
-the `git` type and another one of the `image` type, which Tekton will pass to
-the tasks requesting them.
+the `git` type, which Tekton will pass to tasks requesting them.
 
 Add tasks to the `spec.tasks` field using their names:
 
