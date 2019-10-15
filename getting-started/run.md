@@ -49,14 +49,12 @@ status:
     ...
 ```
 
-**Check the message, reason, and status Tekton reports**. Should an error occur
-when running the pipeline, the cause will be reported in these fields with
-instructions for troubleshooting. If everything runs smoothly, you should see
-an `All Steps have completed executing message` with a `Succeeded` reason
-listed.
-
-**Note**: It may take a few moments before Tekton finishes executing your
-pipeline.
+It may take a few moments before Tekton finishes executing your
+pipeline. **Check the message, reason, and status Tekton reports**. Should an
+error occur when running the pipeline, the cause will be reported in these
+fields with instructions for troubleshooting. If everything runs smoothly, you
+should see an `All Steps have completed executing` message with a `Succeeded`
+reason listed.
 
 ## Check out the deployment in the cluster
 
@@ -68,7 +66,8 @@ pipeline.
 
 2. Run the following command to access the service:
 
-    `curl http://YOUR-CLUSTER-IP/hello`{{execute}}
+    `curl http://YOUR-CLUSTER-IP/hello`
   
-    Replace `YOUR-CLUSTER-IP` with the value of your own. You should see
+    Replace `YOUR-CLUSTER-IP` with the value of your own. It may take a few
+    moments before your app gets ready. You should see
     `Hello World!` returned as the output.
