@@ -48,4 +48,9 @@ Tekton is now running in your Katacode experimental cluster. To help the
 installation run smoothly in this special environment, a few extra steps
 are required:
 
-`./tekton-examples/getting-started/src/init.sh`
+```sh
+mkdir /mnt/data && kubectl apply -f https://k8s.io/examples/pods/storage/pv-volume.yaml && \
+kubectl apply -f ~/tekton-examples/getting-started/src/tekton-katacoda/init.yaml && \
+kubectl delete configmap/config-artifact-pvc -n tekton-pipelines && \
+kubectl create configmap config-artifact-pvc --from-literal=storageClassName=manual -n tekton-pipelines
+```{{execute}}

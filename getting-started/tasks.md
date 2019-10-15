@@ -159,4 +159,4 @@ So far you have been using hard-coded values in your tasks. Tekton also
 supports variables in its specification, which allows developers
 to switch configurations easily at runtime. You can specify
 them in `spec.inputs` as `params` and use them in the steps with the
-`$(YOUR-VAR-NAME)` syntax. For examples, see [build.yaml] and [deploy.yaml].
+`$(YOUR-VAR-NAME)` syntax. For examples, see `build.yaml` and `deploy.yaml`.

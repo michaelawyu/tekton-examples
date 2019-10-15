@@ -29,4 +29,4 @@ spec:
       - --port=80
       - --target-port=8080
       - --name=mysvc
-      - --type="NodePort"
+      - --type=NodePort
