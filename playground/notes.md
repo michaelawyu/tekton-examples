@@ -16,6 +16,10 @@ see [Tekton Documentation](tekton.dev/docs).
 
 ## Tips
 
+### CLI
+
+Run `tkn`{{execution}} for help and instructions.
+
 ### Docker usage
 
 If you would like to use Docker in your Tekton pipelines, mount the Docker
