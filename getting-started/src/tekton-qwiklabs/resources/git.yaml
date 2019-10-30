@@ -6,10 +6,10 @@ metadata:
 spec:
   type: git
   params:
-    # The revision/branch of the repository
-    - name: revision
-      value: master
-    # The URL of the repository
-    - name: url
-      value: https://github.com/michaelawyu/tekton-examples
+  # The revision/branch of the repository
+  - name: revision
+    value: master
+  # The URL of the repository
+  - name: url
+    value: https://github.com/michaelawyu/tekton-examples
 

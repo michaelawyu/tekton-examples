@@ -5,5 +5,5 @@ metadata:
 spec:
   type: image
   params:
-    - name: url
-      value: gcr.io/YOUR-GCP-PROJECT/example-app
+  - name: url
+    value: gcr.io/YOUR-GCP-PROJECT/example-app
