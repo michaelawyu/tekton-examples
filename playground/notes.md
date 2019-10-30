@@ -1,7 +1,7 @@
 Katacoda is now starting your experimental Kubernetes cluster and configuring
-Tekton. It may take a few moments to set everything up. 
+Tekton. It may take a few moments to complete. 
 
-## Check setup progress
+## Progress check
 
 Run `kubectl cluster-info`{{execute}} to check if the Kubernetes cluster has
 been started. You should see the addresses of your Kubernetes cluster master
