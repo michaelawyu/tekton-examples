@@ -1,20 +1,26 @@
-Your experimental Kubernetes cluster is now ready with Tekton configured.
-Below are some notes and shortcuts for using this playground.
+Katacoda is now starting your experimental Kubernetes cluster and configuring
+Tekton. It may take a few moments to set everything up. 
 
-## Health check
+## Check setup progress
 
-`kubectl cluster-info`{{execute}}
+Run `kubectl cluster-info`{{execute}} to check if the Kubernetes cluster has
+been started. You should see the addresses of your Kubernetes cluster master
+node and DNS in the output.
 
-## Tekton status
+Run `kubectl get pods --namespace tekton-pipelines`{{execute}} to check if
+Tekton has been installed. All **5** components listed in the output should
+have the status `running`.
 
-`kubectl get pods --namespace tekton-pipelines`{{execute}}
+The playground is now fully functional. For more information about Tekton,
+see [Tekton Documentation](tekton.dev/docs).
 
-Every component listed in the output should have the status `running`.
+## Tips
 
-## Using Docker when running Tekton pipelines
+### Docker usage
 
-Mount the Docker socket and storage from the playground environment into
-your Tekton pipelines with the following two
+If you would like to use Docker in your Tekton pipelines, mount the Docker
+socket and storage from the playground environment into Kubernetes with
+the following two
 [Persistent Volume Claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/):
 
 * `dlib-vol-claim` (mount at path `/var/lib/docker`)
