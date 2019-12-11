@@ -57,3 +57,44 @@ spec:
     - test-server
 ...
 ```
+
+Note that you may specify multiple prerequisites in the pipeline, i.e.
+to run the task `system-test`, both `test-client` and `test-server` must
+complete.
+
+With the `runAfter` syntax, Tekton will organize the tasks in this pipeline
+into a directed acyclic execution graph and perform the CI/CD workflow in
+the specified order:
+
+![diagram](https://github.com/michaelawyu/tekton-examples/blob/master/pipelines/images/diagram.png?raw=true)
+
+In addition the `runAfter` syntax, Tekton also provides the `from` syntax
+for the use case where **the output of one task is the input of another task**.
+For example, if `build-client` outputs an image which `test-client` must use,
+you must use `from` instead of `runAfter` in the pipeline specification:
+
+```yaml
+...
+spec:
+  tasks:
+  - name: build-client
+    taskRef:
+      name: build-client
+    # This task outputs an image
+    resources:
+      outputs:
+      - name: my-image
+        resource: my-image
+  - name: test-client
+    taskRef:
+      name: test-client
+    # This task requires an image as input
+    resources:
+      inputs:
+      - name: my-image
+        resource: my-image
+        # The input comes from the task `build-client`
+        from:
+        - build-client
+...
+```

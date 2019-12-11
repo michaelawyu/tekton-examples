@@ -12,12 +12,12 @@ It is flexible, and supports many advanced CI/CD patterns, including
 rolling, blue/green, and canary deployment.
 
 In this scenario, you will learn about Tekton pipelines, a composite responible
-for organizing Tekton tasks into a CI/CD workflow. More specifically, **you
+for organizing Tekton tasks into a CI/CD workflow. More specifically, you
 will use a Tekton pipeline to assemble a number of tasks in the manner of a
 directed acyclic execution graph, where a client-side app and a server-side app
-are first built and inspected separately, then tested side by side as a system**.
+are first built and inspected separately, then tested side by side as a system.
 
-
+![diagram](https://github.com/michaelawyu/tekton-examples/blob/master/pipelines/images/diagram.png?raw=true)
 
 **Note**: You can use the resize button on the top-right corner of this
 scenario to switch to full-screen mode.
