@@ -34,4 +34,4 @@ spec:
     # Here you will change the directory, install all the dependencies the app uses,
     # and run the app
     args:
-    - cd /workspace/git/tasks/src/server && pip install -r requirements.txt && python main.py
+    - git clone https://github.com/michaelawyu/tekton-examples.git && cd ./tekton-examples/tasks/src/server && pip install -r requirements.txt && python main.py

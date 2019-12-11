@@ -12,7 +12,7 @@ To start the task, run the command below:
 
 You can check the status of your pipeline with the following command:
 
-`kubectl get taskuns/example-task-run -o yaml`{{execute}}
+`kubectl get taskruns/example-task-run -o yaml`{{execute}}
 
 The output should look as follows:
 
