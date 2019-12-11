@@ -1,0 +1,43 @@
+{
+    "title": "Using Tekton Pipelines",
+    "description": "Learn how to use Tekton pipelines",
+    "difficulty": "Beginner",
+    "time": "30 minutes",
+    "details": {
+      "steps": [
+        {
+          "title": "Setup",
+          "text": "setup.md"
+        },
+        {
+          "title": "Basics",
+          "text": "basics.md"
+        },
+        {
+          "title": "Execution Orders",
+          "text": "order.md"
+        },
+        {
+          "title": "Retries",
+          "text": "retries.md"
+        },
+        {
+          "title": "Running the pipeline",
+          "text": "run.md"
+        }
+      ],
+      "intro": {
+        "text": "intro.md",
+        "courseData": "init.sh"
+      },
+      "finish": {
+        "text": "finish.md"
+      }
+    },
+    "environment": {
+      "uilayout": "editor-terminal"
+    },
+    "backend": {
+      "imageid": "kubernetes"
+    }
+  }

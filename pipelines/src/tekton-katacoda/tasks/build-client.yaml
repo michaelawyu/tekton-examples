@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: build-client
+spec:
+  steps:
+  - name: build-client
+    image: ubuntu
+    command:
+    - /bin/bash
+    - -c
+    args:
+    - echo "Building the client app."

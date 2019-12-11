@@ -1,0 +1,31 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: example-pipeline
+spec:
+  tasks:
+  - name: build-client
+    taskRef:
+      name: build-client
+  - name: test-client
+    taskRef:
+      name: test-client
+    # Run test-client only when build-client has completed
+    runAfter:
+    - build-client
+  - name: build-server
+    taskRef:
+      name: build-server
+  - name: test-server
+    taskRef:
+      name: test-server
+    # Run test-client only when build-client has completed
+    runAfter:
+    - build-server
+  - name: system-test
+    taskRef:
+      name: system-test
+    # Run test-client only when both test-client and test-server has completed
+    runAfter:
+    - test-client
+    - test-server

@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: build-server
+spec:
+  steps:
+  - name: build-server
+    image: ubuntu
+    command:
+    - /bin/bash
+    - -c
+    args:
+    - echo "Building the server app."

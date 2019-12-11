@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: system-test
+spec:
+  steps:
+  - name: system-test
+    image: ubuntu
+    command:
+    - /bin/bash
+    - -c
+    args:
+    - echo "Testing the client app and the server app."
