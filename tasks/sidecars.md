@@ -34,10 +34,10 @@ specs:
     - /bin/bash
     - -c
     # The arguments to use with the command
-    # Here you will change the directory, install all the dependencies the app uses,
-    # and run the app
+    # Here you will clone the source code, install all the 
+    # dependencies the app uses, and run the app
     args:
-    - cd /workspace/git/tasks/src/server && pip install -r requirements.txt && python main.py
+    - git clone https://github.com/michaelawyu/tekton-examples.git && cd ./tekton-examples/tasks/src/server && pip install -r requirements.txt && python main.py
 ```
 
 With this setup, Tekton (Kubernetes) will run the step in the task and the
