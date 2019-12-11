@@ -45,5 +45,5 @@ sidecar in the same pod, and they may communicate as if they are running side
 by side on a local machine. The tests have been configured to use
 `localhost:8080` as the address of the server.
 
-Tekton will stop sidecars automatically after **all the steps in the task**
-have been completed.
+Note that sidecars are started **before the task itself**; Tekton will stop
+sidecars automatically after **all the steps in the task** have been completed.

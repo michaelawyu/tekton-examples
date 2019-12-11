@@ -1,12 +1,12 @@
-A Tekton Task is a collection of steps to run in a CI/CD workflow. To specify
-a Tekton Task, create a Kubernetes Custom Resource with the following fields:
+A Tekton task is a collection of steps to run in a CI/CD workflow. To specify
+a Tekton task, create a Kubernetes Custom Resource with the following fields:
 
 * `apiVersion`: The API version of the task, such as `tekton.dev/v1alpha1`.
 * `kind`: Tekton Tasks always have the `kind` `Task`.
 * `metadata`: The metadata of the task, such as its name.
 * `spec`: The specification of the task, including each step of the task.
 
-Below is an example of a Tekton Task:
+Below is an example of a Tekton task:
 
 ```yaml
 apiVersion: tekton.dev/v1alpha1

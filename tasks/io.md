@@ -1,6 +1,6 @@
-As explained earlier, in this scenario you will run a number of tests on an
-app. To complete this task, Tekton must retrieve the source code of the app
-first as an input.
+As explained earlier, in this scenario you will run a number of tests on a
+client app. To achieve this, Tekton must first retrieve the source code of
+the app as an input.
 
 Tekton supports the following resource types as inputs and outputs:
 
