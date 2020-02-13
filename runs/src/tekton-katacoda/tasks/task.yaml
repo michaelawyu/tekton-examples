@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: example-task
+spec:
+  inputs:
+    resources:
+    - name: git
+      type: git
+  steps:
+  - name: pytest
+    image: python
+    command:
+    - /bin/bash
+    - -c
+    args:
+    - cd /workspace/git/runs/src/app/ && pip install -r requirements.txt && pip install -r dev_requirements.txt && pytest .

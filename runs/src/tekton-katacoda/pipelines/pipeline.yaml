@@ -1,0 +1,12 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: example-pipeline
+spec:
+  resources:
+  - name: git
+    type: git
+  tasks:
+  - name: example-task
+    taskRef:
+      name: example-task
