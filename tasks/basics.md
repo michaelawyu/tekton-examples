@@ -51,4 +51,4 @@ this task uses.
 available to the task. You may mount them in one or more of steps.
 * `sidecars`: One or more sidecar containers that run alongside the steps.
 
-You can view the full list of fields that `spec` supports here.
+[You can view the full list of fields that `spec` supports here](https://tekton.dev/docs/pipelines/tasks).

@@ -27,7 +27,7 @@ To run the task, execute the command below:
 `kubectl apply -f tekton-examples/runs/src/tekton-katacoda/pipelines/pipelineRun.yaml`{{execute}}
 
 It may take a few moments to complete. You can check its status with command
-`kubectl get taskruns/example-pipeline-run -o yaml`{{execute}}.
+`kubectl get pipelineruns/example-pipeline-run -o yaml`{{execute}}.
 
 PipelineRuns includes the execution status of the associated pipeline, including the
 status of each task. Should there be an error, you can check with the pipelineRun

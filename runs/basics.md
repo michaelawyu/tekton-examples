@@ -111,7 +111,7 @@ spec:
     - /bin/bash
     - -c
     args:
-    - cd /workspace/git/tasks/src/client && pip install -r requirements.txt && pip install -r dev_requirements.txt && pytest .
+    - cd /workspace/git/runs/src/app && pip install -r requirements.txt && pip install -r dev_requirements.txt && pytest .
 ```
 
 And the pipeline simply wraps the task:

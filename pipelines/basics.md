@@ -72,4 +72,4 @@ should an error occurs.
 * `runAfter`: Execute the task after another specific task.
 * `conditions`: Execute the task only when a specific condition has been met.
 
-You can view the full list of fields that `spec` supports here.
+[You can view the full list of fields that `spec` supports here](https://tekton.dev/docs/pipelines/pipelines).
