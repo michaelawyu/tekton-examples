@@ -129,6 +129,10 @@ spec:
   - name: example-task
     taskRef:
       name: example-task
+    resources:
+      inputs:
+      - name: git
+        resource: git
 ```
 
 To apply the task and the pipeline, run the command below:
